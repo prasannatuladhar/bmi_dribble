@@ -4,6 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:bmi_dribble/calculator_brain.dart';
+import 'constant.dart';
 
 import 'clipper.dart';
 
@@ -12,10 +13,7 @@ class InputPage extends StatefulWidget {
   _InputPageState createState() => _InputPageState();
 }
 
-const activeForegroundColor = Color(0xFF313131);
-const activeBackgroundColor = Color(0xFFA3F0BB);
-const inactiveForegroundColor = Color(0xFFE8E8E8);
-const inactiveBackgroundColor = Color(0xFF1F1F1F);
+
 
 int age = 27;
 int weight=60;
@@ -24,7 +22,7 @@ enum Gender { male, female }
 
 class _InputPageState extends State<InputPage> {
   Gender selectedGender;
-  Calculator calc =Calculator(weight: weight,height: height);
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -266,7 +264,11 @@ class _InputPageState extends State<InputPage> {
                     shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(25)),
                     onPressed: () {
-                      Navigator.push(context, MaterialPageRoute(builder: (context)=>ResultPage()));
+                      Calculator calc =Calculator(weight: weight,height: height);
+                      Navigator.push(context, MaterialPageRoute(builder: (context)=>ResultPage(
+                        bmiValue: calc.getBmiValue(),
+                        bmiInterpolation: calc.getBmiInterpolation(),
+                      )));
                     },
                     color: activeBackgroundColor,
                     child: Padding(
